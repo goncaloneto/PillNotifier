@@ -35,21 +35,19 @@ class AddMedicineActivity : AppCompatActivity() {
 
             val nameEditText = findViewById<EditText>(R.id.nameEditText)
             val qtyEditText = findViewById<EditText>(R.id.qtyTextNumber)
+            val dosageEditText = findViewById<EditText>(R.id.dosageEditText)
 
-            if(nameEditText.text.isEmpty()) {
-                ShowNoty("Name can't be empty!")
+            if(nameEditText.text.isEmpty() || qtyEditText.text.isEmpty() || dosageEditText.text.isEmpty()) {
+                ShowNoty("All fields are mandatory!")
             }
             else {
-                if (qtyEditText.text.isEmpty()) {
-                    ShowNoty("Quantity can't be empty!")
-                } else {
-                    val n = nameEditText.text.toString()
-                    val q = qtyEditText.text.toString().toInt()
+                val n = nameEditText.text.toString()
+                val q = qtyEditText.text.toString().toInt()
+                val d = qtyEditText.text.toString().toFloat()
 
-                    myDB.AddPillBox(n, q, q, date)
-
-                    finish()
-                }
+                myDB.AddPillBox(n, q, q.toFloat(), d, date, Date().time)
+                setResult(RESULT_OK);
+                finish()
             }
         }
     }

@@ -1,5 +1,6 @@
 package goncalo.neto.pillnotifier
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +19,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var myDB: DatabaseHelper
     var pillList = mutableListOf<PillBox>()
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK)
+        {
+            UpdatePillList()
+            UpdateListView()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { _ ->
             val addPage = Intent(this, AddMedicineActivity::class.java)
-            startActivity(addPage)
+            this.startActivityForResult(addPage,1);
         }
     }
 
@@ -38,9 +48,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun UpdatePillList()
     {
+        pillList.clear()
         val data = myDB.ListBoxes
         while (data.moveToNext()) {
-            val box = PillBox(data.getString(1), data.getInt(2), data.getInt(3), Date(data.getLong(4)))
+            val box = PillBox(data.getString(DatabaseHelper.NAME_COL_INDEX), data.getInt(DatabaseHelper.QTY_COL_INDEX), data.getFloat(DatabaseHelper.REMAINING_COL_INDEX), data.getFloat(DatabaseHelper.DOSAGE_COL_INDEX), Date(data.getLong(DatabaseHelper.EXP_DATE_COL_INDEX)), Date(data.getLong(DatabaseHelper.START_DATE_COL_INDEX)))
             pillList.add(box)
         }
     }

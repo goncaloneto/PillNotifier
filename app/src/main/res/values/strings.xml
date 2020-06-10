@@ -7,6 +7,7 @@
 
     <string name="name_edit_text_hint">Name</string>
     <string name="quantity_label">Quantity</string>
+    <string name="dosage_label">Dosage</string>
     <string name="expiration_date_label">Expiration Date</string>
     <string name="save_button_text">Save</string>
 </resources>

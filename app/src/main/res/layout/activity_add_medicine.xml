@@ -48,8 +48,8 @@
         android:layout_marginTop="16dp"
         android:labelFor="@id/calendarView"
         android:text="@string/expiration_date_label"
-        app:layout_constraintStart_toStartOf="@+id/qtyTextView"
-        app:layout_constraintTop_toBottomOf="@+id/qtyTextNumber" />
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/dosageEditText" />
 
     <Button
         android:id="@+id/saveBtn"
@@ -67,4 +67,25 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/dateTextView"
         app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+
+    <EditText
+        android:id="@+id/dosageEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:labelFor="@id/dosageEditText"
+        android:text="@string/dosage_label"
+        app:layout_constraintStart_toStartOf="@+id/qtyTextView"
+        app:layout_constraintTop_toBottomOf="@+id/qtyTextNumber" />
 </androidx.constraintlayout.widget.ConstraintLayout>
